@@ -37,10 +37,12 @@ public class ItemBase : MonoBehaviour {
 
 	public virtual void OnPickup(ItemCarrier pickedUpBy){
 		carrier = pickedUpBy;
+		transform.parent = pickedUpBy.transform;
 		pickedUpBy.carriedItem = this;
 	}
 
 	public virtual void OnDrop(){
+		carrier.carriedItem = null;
 		carrier = null;
 	}
 

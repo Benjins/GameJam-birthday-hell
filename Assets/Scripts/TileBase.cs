@@ -19,6 +19,6 @@ public class TileBase : MonoBehaviour {
 	}
 
 	public virtual void OnExplode(Vector3 explosionCenter){
-
+		Destroy(gameObject);
 	}
 }
