@@ -44,6 +44,7 @@ public class TileSpawner : MonoBehaviour {
 			for(int x = 0; x < tileMap.width; x++){
 				for(int y = 0; y < tileMap.height; y++){
 					Color pixel = tileMap.GetPixel(x,y);
+					pixel.a = 1.0f; //Ignore alpha
 					GameObject prefab = null;
 
 					//If the color is one we recognize
