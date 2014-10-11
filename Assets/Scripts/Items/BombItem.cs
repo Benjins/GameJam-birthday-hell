@@ -49,7 +49,9 @@ public class BombItem : ItemBase {
 	protected void Explode(){
 		int explodeCount = 0;
 		foreach(Collider col in Physics.OverlapSphere(transform.position, explosionRadius)){
-			if(col.tag == "Terrain" && col.gameObject != gameObject){
+			//col.renderer.material.color = Color.red;
+			//if(col.tag == "Terrain" && col.gameObject != gameObject){
+				//col.renderer.material.color = Color.red;
 				TileBase tile = col.gameObject.GetComponent<TileBase>();
 				if(tile != null){
 					//tile.renderer.material.color = Color.red;
@@ -60,7 +62,7 @@ public class BombItem : ItemBase {
 					Debug.Log(col.gameObject.name);
 					Debug.LogError("There is an object marked with tag Terrain without a TileBase component.", collider.gameObject);
 				}
-			}
+			//}
 		}
 
 		Debug.Log("Explosion count: " + explodeCount);

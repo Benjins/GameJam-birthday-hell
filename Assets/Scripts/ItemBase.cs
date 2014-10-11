@@ -58,7 +58,7 @@ public class ItemBase : MonoBehaviour {
 		thrown = true;
 
 		if(rigidbody){
-			rigidbody.AddForce(new Vector3(0.8f, 0.6f, 0.0f) * throwForce);
+			rigidbody.AddForce(new Vector3(1.0f, 1.0f, 0.0f) * throwForce);
 		}
 		//Actually throw the item with physics.
 	}
