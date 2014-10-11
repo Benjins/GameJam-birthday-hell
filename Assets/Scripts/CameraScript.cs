@@ -3,8 +3,8 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour {
 
-	public bool isFollowing;
-	public string charFollowing;
+	public static bool isFollowing;
+	public static string charFollowing;
 	public GameObject Billy;
 	public GameObject Brett;
 
