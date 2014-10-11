@@ -6,16 +6,22 @@ public class ItemCarrier : MonoBehaviour {
 	public float pickUpRadius = 0.5f;
 	//[HideInInspector]
 	public ItemBase carriedItem = null;
+	CameraScript cameraScript;
 
 	Transform itemLocation;
 
 	void Start(){
 		itemLocation = transform.FindChild("Item Location");
+		cameraScript = Camera.main.GetComponent<CameraScript>();
 	}
 
 	void Update(){
 		if(carriedItem != null){
 			carriedItem.transform.localPosition = itemLocation.localPosition;
+		}
+
+		if( (gameObject == cameraScript.Billy) ^ (cameraScript.charFollowing == "Billy")){
+			return;
 		}
 
 		//Throw
@@ -25,14 +31,14 @@ public class ItemCarrier : MonoBehaviour {
 			}
 		}
 
-		if(Input.GetKeyDown(KeyCode.O)){
-			if(carriedItem != null){
-				carriedItem.OnUse();
-			}
-		}
+//		if(Input.GetKeyDown(KeyCode.U)){
+//			if(carriedItem != null){
+//				carriedItem.OnUse();
+//			}
+//		}
 
 		//Pick up
-		if(Input.GetKeyDown(KeyCode.P)){
+		if(Input.GetKeyDown(KeyCode.U)){
 			//Drop the item we have
 			if(carriedItem != null){
 				carriedItem.OnDrop();

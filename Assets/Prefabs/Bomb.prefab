@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d610e8c9ad51dd42ad3200b1d638c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwForce: 1
+  throwForce: 5
   useGravity: 1
   itemName: Item
   thrown: 0
