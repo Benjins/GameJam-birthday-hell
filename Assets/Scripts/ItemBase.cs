@@ -4,6 +4,7 @@ using System.Collections;
 public class ItemBase : MonoBehaviour {
 
 	public string itemName = "Item";
+	public bool thrown = false;
 
 	//TO-DO: Chagne type to character controller script
 	GameObject carrier = null;
@@ -45,5 +46,15 @@ public class ItemBase : MonoBehaviour {
 
 	public virtual void OnThrow(){
 		carrier = null;
+		thrown = true;
+	}
+
+	protected virtual void OnCollisonEnter(Collision col){
+		if(thrown && col.collider.tag == "Player"){
+			//Player picks up item
+		}
+		else if(thrown && col.collider.tag == "Terrain"){
+			thrown = false;
+		}
 	}
 }
