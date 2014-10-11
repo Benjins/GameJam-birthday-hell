@@ -26,9 +26,9 @@ public class Script_Character : MonoBehaviour {
 		if (!dead) {
 			if (controller.isGrounded) {
 				moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, 0);
+				moveDirection = transform.TransformDirection (moveDirection);
 				moveDirection *= speed;
-				//moveDirection = transform.TransformDirection (moveDirection);
-				if (Input.GetKeyDown ("w"))
+				if (Input.GetKey ("w"))
 					moveDirection.y = jumpSpeed;
 				moveDirection.z = 0;
 			}
