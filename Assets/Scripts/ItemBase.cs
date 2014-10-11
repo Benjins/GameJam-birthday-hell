@@ -3,15 +3,18 @@ using System.Collections;
 
 public class ItemBase : MonoBehaviour {
 
+	public bool useGravity = true;
 	public string itemName = "Item";
 	public bool thrown = false;
 
 	//TO-DO: Chagne type to character controller script
-	GameObject carrier = null;
+	ItemCarrier carrier = null;
 
 	// Use this for initialization
 	void Start () {
-	
+		if(rigidbody != null){
+			rigidbody.useGravity = useGravity;
+		}
 	}
 	
 	// Update is called once per frame
@@ -32,8 +35,9 @@ public class ItemBase : MonoBehaviour {
 
 	}
 
-	public virtual void OnPickup(GameObject pickedUpBy){
+	public virtual void OnPickup(ItemCarrier pickedUpBy){
 		carrier = pickedUpBy;
+		pickedUpBy.carriedItem = this;
 	}
 
 	public virtual void OnDrop(){
@@ -46,13 +50,16 @@ public class ItemBase : MonoBehaviour {
 
 	public virtual void OnThrow(){
 		carrier = null;
+		carrier.carriedItem = null;
 		thrown = true;
+
+		//Actually throw the item with physics.
 	}
 
 	protected virtual void OnCollisonEnter(Collision col){
 		if(thrown && col.collider.tag == "Player"){
 			thrown = false;
-			//Player picks up item
+			OnPickup(col.collider.GetComponent<ItemCarrier>());
 		}
 		else if(thrown && col.collider.tag == "Terrain"){
 			thrown = false;

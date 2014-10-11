@@ -20,12 +20,9 @@ public class BombItem : ItemBase {
 	}
 
 	protected override void OnCollisonEnter(Collision col){
-		if(thrown && col.collider.tag == "Player"){
-			thrown = false;
-			//Player picks up item
-		}
-		else if(thrown && col.collider.tag == "Terrain"){
-			thrown = false;
+		base.OnCollisonEnter(col);
+
+		if(thrown && col.collider.tag == "Terrain"){
 			Explode();
 		}
 	}
@@ -38,7 +35,7 @@ public class BombItem : ItemBase {
 					tile.OnExplode(transform.position);
 				}
 				else{
-					Debug.LogError("There is an object markes with tag Terrain without a TileBase component.", collider.gameObject);
+					Debug.LogError("There is an object marked with tag Terrain without a TileBase component.", collider.gameObject);
 				}
 			}
 		}
