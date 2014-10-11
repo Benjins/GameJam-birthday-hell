@@ -45,6 +45,7 @@ public class ItemBase : MonoBehaviour {
 	public virtual void OnDrop(){
 		carrier.carriedItem = null;
 		carrier = null;
+		transform.parent = null;
 	}
 
 	public virtual void OnUse(){
@@ -58,7 +59,7 @@ public class ItemBase : MonoBehaviour {
 		thrown = true;
 
 		if(rigidbody){
-			rigidbody.AddForce(new Vector3(1.0f, 1.0f, 0.0f) * throwForce);
+			rigidbody.AddForce(new Vector3(1.0f, 1.0f, 0.0f) * throwForce, ForceMode.Impulse);
 		}
 		//Actually throw the item with physics.
 	}
