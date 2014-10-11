@@ -24,13 +24,12 @@ public class Script_Character : MonoBehaviour {
 			//transform.Translate(new Vector3(0, 0, -this.transform.position.z));
 		//}
 		if (!dead) {
+			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), moveDirection.y, 0);
+			moveDirection = transform.TransformDirection (moveDirection);
+			moveDirection.x *= speed;
 			if (controller.isGrounded) {
-				moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, 0);
-				moveDirection = transform.TransformDirection (moveDirection);
-				moveDirection *= speed;
 				if (Input.GetKey ("w"))
 					moveDirection.y = jumpSpeed;
-				moveDirection.z = 0;
 			}
 			controller.Move (moveDirection * Time.deltaTime);
 		} else {
