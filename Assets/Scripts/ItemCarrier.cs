@@ -20,11 +20,15 @@ public class ItemCarrier : MonoBehaviour {
 
 		//Throw
 		if(Input.GetKeyDown(KeyCode.I)){
-			carriedItem.OnThrow();
+			if(carriedItem != null){
+				carriedItem.OnThrow();
+			}
 		}
 
 		if(Input.GetKeyDown(KeyCode.O)){
-			carriedItem.OnUse();
+			if(carriedItem != null){
+				carriedItem.OnUse();
+			}
 		}
 
 		//Pick up

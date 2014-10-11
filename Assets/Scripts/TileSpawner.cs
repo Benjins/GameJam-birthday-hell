@@ -14,16 +14,6 @@ public class TileSpawner : MonoBehaviour {
 
 	public List<MapType> colorKeys;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	[ContextMenu("Spawn Tiles")]
 	public void SpawnTiles(){
 		if(tileMap != null || true){

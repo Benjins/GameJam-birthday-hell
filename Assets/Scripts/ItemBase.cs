@@ -54,6 +54,7 @@ public class ItemBase : MonoBehaviour {
 	public virtual void OnThrow(){
 		carrier.carriedItem = null;
 		carrier = null;
+		transform.parent = null;
 		thrown = true;
 
 		if(rigidbody){
