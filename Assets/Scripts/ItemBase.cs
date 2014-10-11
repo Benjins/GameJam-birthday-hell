@@ -51,6 +51,7 @@ public class ItemBase : MonoBehaviour {
 
 	protected virtual void OnCollisonEnter(Collision col){
 		if(thrown && col.collider.tag == "Player"){
+			thrown = false;
 			//Player picks up item
 		}
 		else if(thrown && col.collider.tag == "Terrain"){
