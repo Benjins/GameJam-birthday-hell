@@ -13,7 +13,6 @@ public class BombItem : ItemBase {
 		if(dropped){
 			timeSinceFuseStart += Time.deltaTime;
 			if(timeSinceFuseStart >= fuseTime){
-				Debug.Log("Explode 1");
 				Explode();
 			}
 		}
@@ -22,6 +21,10 @@ public class BombItem : ItemBase {
 	public override void OnDrop(){
 		base.OnDrop();
 		dropped = true;
+	}
+
+	public override void OnUse(){
+		OnDrop();
 	}
 
 	public override void OnPickup (ItemCarrier pickedUpBy){
@@ -33,21 +36,25 @@ public class BombItem : ItemBase {
 		timeSinceFuseStart = 0.0f;
 	}
 
-	protected override void OnCollisonEnter(Collision col){
-		base.OnCollisonEnter(col);
-
-		if(thrown && col.collider.tag == "Terrain"){
-			Debug.Log("Explode 2");
+	protected override void OnCollisionEnter(Collision col){
+		if(thrown && col.collider.tag == "Player"){
+			thrown = false;
+			OnPickup(col.collider.GetComponent<ItemCarrier>());
+		}
+		else if(thrown && col.collider.tag == "Terrain"){
 			Explode();
 		}
 	}
 
 	protected void Explode(){
-		foreach(Collider col in Physics.OverlapSphere(transform.position,explosionRadius)){
+		int explodeCount = 0;
+		foreach(Collider col in Physics.OverlapSphere(transform.position, explosionRadius)){
 			if(col.tag == "Terrain" && col.gameObject != gameObject){
 				TileBase tile = col.gameObject.GetComponent<TileBase>();
 				if(tile != null){
+					//tile.renderer.material.color = Color.red;
 					tile.OnExplode(transform.position);
+					explodeCount++;
 				}
 				else{
 					Debug.Log(col.gameObject.name);
@@ -55,6 +62,8 @@ public class BombItem : ItemBase {
 				}
 			}
 		}
+
+		Debug.Log("Explosion count: " + explodeCount);
 
 		Destroy(gameObject);
 	}

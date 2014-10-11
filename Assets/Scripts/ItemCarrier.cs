@@ -34,7 +34,6 @@ public class ItemCarrier : MonoBehaviour {
 				carriedItem.OnDrop();
 			}
 			else{
-				Debug.Log("Trying to pick up item.");
 				//Look for an item on the gorund to pick up
 				foreach(Collider col in Physics.OverlapSphere(transform.position, pickUpRadius)){
 					if(col.tag == "Item"){
