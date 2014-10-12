@@ -15,6 +15,7 @@ public class CameraScript : MonoBehaviour {
 		this.transform.parent = Billy.transform;
 		this.transform.position = new Vector3(Billy.transform.position.x, Billy.transform.position.y, -40);
 		AudioSource a = this.GetComponent<AudioSource> ();
+		a.loop = true;
 		a.Play (0);
 		//AudioSource.PlayClipAtPoint (music, transform.position);
 	}
