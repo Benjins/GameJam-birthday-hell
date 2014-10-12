@@ -34,10 +34,10 @@ public class Script_Character : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (Application.loadedLevel == 1 && transform.position.y < 6) {
+		if (Application.loadedLevel == 2 && transform.position.y < 6) {
 			Application.LoadLevel (Application.loadedLevel);
 		}
-		else if (Application.loadedLevel == 2 && transform.position.y < 9) {
+		else if (Application.loadedLevel == 3 && transform.position.y < 9) {
 			Application.LoadLevel (Application.loadedLevel);
 		}
 
