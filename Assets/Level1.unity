@@ -139,7 +139,6 @@ MonoBehaviour:
   gravity: 20
   dead: 0
   controller: {fileID: 0}
-  self: {fileID: 225808967}
   follower: {fileID: 964801491}
 --- !u!23 &225808971
 Renderer:
@@ -480,7 +479,6 @@ MonoBehaviour:
   gravity: 20
   dead: 0
   controller: {fileID: 0}
-  self: {fileID: 964801491}
   follower: {fileID: 225808967}
 --- !u!33 &964801495
 MeshFilter:

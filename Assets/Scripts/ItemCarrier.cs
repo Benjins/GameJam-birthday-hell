@@ -20,7 +20,7 @@ public class ItemCarrier : MonoBehaviour {
 			carriedItem.transform.localPosition = itemLocation.localPosition;
 		}
 
-		if( (gameObject == cameraScript.Billy) ^ (cameraScript.charFollowing == "Billy")){
+		if( (gameObject == cameraScript.Billy) ^ (CameraScript.charFollowing == "Billy")){
 			return;
 		}
 

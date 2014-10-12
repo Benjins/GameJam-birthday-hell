@@ -31,6 +31,7 @@ public class CameraScript : MonoBehaviour {
 				this.transform.parent = Billy.transform;
 				this.transform.position = new Vector3(Billy.transform.position.x, Billy.transform.position.y, -40);
 			}
+			Debug.Log ("switched when "+charFollowing+"'s y was "+this.transform.position.y);
 		}
 		if (Input.GetKeyDown ("p")) {
 			//toggle follow me

@@ -45,11 +45,11 @@ public class Script_Character : MonoBehaviour {
 				else {
 					moveDirection = new Vector3 (0, moveDirection.y, 0);
 				}
-				if (transform.position.y < (follower.transform.position.y - 1)) {
+				if (this.transform.position.y < (follower.transform.position.y - 1)) {
 					//jump
 					if (controller.isGrounded) {
 						moveDirection.y = jumpSpeed;
-						Debug.Log ("AI Jumped");
+						Debug.Log (name+" jumped when y was "+transform.position.y);
 					}
 				}
 				controller.Move (moveDirection * Time.deltaTime);
