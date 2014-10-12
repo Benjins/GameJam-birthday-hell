@@ -18,8 +18,8 @@ public class PortalScript : MonoBehaviour {
 	void Update () {
 		if (BillyHere && BrettHere && GuestHere) {
 			//beat the level
-			if (Application.loadedLevel == 0)
-				Application.LoadLevel ("Level2");
+			if (Application.loadedLevel != 2)
+				Application.LoadLevel (Application.loadedLevel+1);
 		}
 	}
 
