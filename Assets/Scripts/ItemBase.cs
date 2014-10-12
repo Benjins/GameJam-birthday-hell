@@ -53,13 +53,14 @@ public class ItemBase : MonoBehaviour {
 	}
 
 	public virtual void OnThrow(){
+		float direction = carrier.transform.localScale.x;
 		carrier.carriedItem = null;
 		carrier = null;
 		transform.parent = null;
 		thrown = true;
 
 		if(rigidbody){
-			rigidbody.AddForce(new Vector3(1.0f, 1.0f, 0.0f) * throwForce, ForceMode.Impulse);
+			rigidbody.AddForce(new Vector3(direction, 1.0f, 0.0f) * throwForce, ForceMode.Impulse);
 		}
 		//Actually throw the item with physics.
 	}
