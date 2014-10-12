@@ -80,7 +80,9 @@ public class Script_Character : MonoBehaviour {
 						moveDirection = new Vector3 (0, moveDirection.y, 0);
 					}
 
-					anim.SetFloat("Speed", Mathf.Abs(moveDirection.x));
+					if(anim){
+						anim.SetFloat("Speed", Mathf.Abs(moveDirection.x));
+					}
 
 					if (this.transform.position.y < (follower.transform.position.y - 1)) {
 						//jump
