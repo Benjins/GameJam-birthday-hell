@@ -9,7 +9,7 @@ public class ItemBase : MonoBehaviour {
 	public bool thrown = false;
 
 	//TO-DO: Chagne type to character controller script
-	ItemCarrier carrier = null;
+	public ItemCarrier carrier = null;
 
 	// Use this for initialization
 	void Start () {
