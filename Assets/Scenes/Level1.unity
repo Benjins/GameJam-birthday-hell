@@ -27223,6 +27223,7 @@ MonoBehaviour:
   useGravity: 1
   itemName: Guest
   thrown: 0
+  carrier: {fileID: 0}
 --- !u!23 &1679728364
 Renderer:
   m_ObjectHideFlags: 0
