@@ -40,12 +40,14 @@ public class ItemBase : MonoBehaviour {
 		carrier = pickedUpBy;
 		transform.parent = pickedUpBy.transform;
 		pickedUpBy.carriedItem = this;
+		rigidbody.useGravity = false;
 	}
 
 	public virtual void OnDrop(){
 		carrier.carriedItem = null;
 		carrier = null;
 		transform.parent = null;
+		rigidbody.useGravity = true;
 	}
 
 	public virtual void OnUse(){
@@ -54,13 +56,15 @@ public class ItemBase : MonoBehaviour {
 
 	public virtual void OnThrow(){
 		float direction = carrier.transform.localScale.x;
+		Debug.Log (direction);
 		carrier.carriedItem = null;
 		carrier = null;
 		transform.parent = null;
 		thrown = true;
-
 		if(rigidbody){
-			rigidbody.AddForce(new Vector3(direction, 1.0f, 0.0f) * throwForce, ForceMode.Impulse);
+			//rigidbody.AddForce(new Vector3(direction, 1.0f, 0.0f) * throwForce, ForceMode.Impulse);
+			rigidbody.AddForce(new Vector3(direction*10, 10f, 0) * throwForce);
+			rigidbody.useGravity = true;
 		}
 		//Actually throw the item with physics.
 	}
