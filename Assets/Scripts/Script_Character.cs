@@ -14,16 +14,19 @@ public class Script_Character : MonoBehaviour {
 	public CharacterController controller;
 	public GameObject follower;
 
+	CameraScript cameraScript;
+
 	// Use this for initialization
 	void Start () {
 		controller = GetComponent<CharacterController> ();
+		cameraScript = Camera.main.GetComponent<CameraScript>();
 	}
 
 	
 	void Update() {
 
 		if (!dead) {
-			if (CameraScript.charFollowing == this.name) {
+			if ((CameraScript.charFollowing == "Billy") == (cameraScript.Billy == gameObject)) {
 				moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), moveDirection.y, 0);
 				moveDirection = transform.TransformDirection (moveDirection);
 				moveDirection.x *= speed;
@@ -34,23 +37,28 @@ public class Script_Character : MonoBehaviour {
 				controller.Move (moveDirection * Time.deltaTime);
 			}
 			else {
-				if (transform.position.x > follower.transform.position.x + 2) {
-					//youre to the right, so move left
-					moveDirection = new Vector3 (-speed, moveDirection.y, 0);
-				}
-				else if (transform.position.x < follower.transform.position.x - 2) {
-					//youre to the left, so move right
-					moveDirection = new Vector3 (speed, moveDirection.y, 0);
-				}
-				else {
-					moveDirection = new Vector3 (0, moveDirection.y, 0);
-				}
-				if (this.transform.position.y < (follower.transform.position.y - 1)) {
-					//jump
-					if (controller.isGrounded) {
-						moveDirection.y = jumpSpeed;
-						Debug.Log (name+" jumped when y was "+transform.position.y);
+				if(CameraScript.isFollowing){
+					if (transform.position.x > follower.transform.position.x + 2) {
+						//youre to the right, so move left
+						moveDirection = new Vector3 (-speed, moveDirection.y, 0);
 					}
+					else if (transform.position.x < follower.transform.position.x - 2) {
+						//youre to the left, so move right
+						moveDirection = new Vector3 (speed, moveDirection.y, 0);
+					}
+					else {
+						moveDirection = new Vector3 (0, moveDirection.y, 0);
+					}
+					if (this.transform.position.y < (follower.transform.position.y - 1)) {
+						//jump
+						if (controller.isGrounded) {
+							moveDirection.y = jumpSpeed;
+							Debug.Log (name+" jumped when y was "+transform.position.y);
+						}
+					}
+				}
+				else{
+					moveDirection.x = 0;
 				}
 				controller.Move (moveDirection * Time.deltaTime);
 			}
