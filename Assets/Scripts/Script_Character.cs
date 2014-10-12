@@ -16,10 +16,13 @@ public class Script_Character : MonoBehaviour {
 
 	CameraScript cameraScript;
 
+	Animator anim;
+
 	// Use this for initialization
 	void Start () {
 		controller = GetComponent<CharacterController> ();
 		cameraScript = Camera.main.GetComponent<CameraScript>();
+		anim = GetComponent<Animator>();
 	}
 
 	

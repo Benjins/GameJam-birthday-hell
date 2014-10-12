@@ -16042,7 +16042,7 @@ MonoBehaviour:
   gravity: 20
   dead: 0
   controller: {fileID: 0}
-  follower: {fileID: 0}
+  follower: {fileID: 1510744387}
 --- !u!114 &1022129817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24870,7 +24870,7 @@ MonoBehaviour:
   gravity: 20
   dead: 0
   controller: {fileID: 0}
-  follower: {fileID: 0}
+  follower: {fileID: 1022129813}
 --- !u!1 &1518789068
 GameObject:
   m_ObjectHideFlags: 0
