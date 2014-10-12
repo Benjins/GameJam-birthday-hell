@@ -7,7 +7,6 @@ public class CameraScript : MonoBehaviour {
 	public static string charFollowing;
 	public GameObject Billy;
 	public GameObject Brett;
-	public AudioClip music;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +15,6 @@ public class CameraScript : MonoBehaviour {
 		this.transform.parent = Billy.transform;
 		this.transform.position = new Vector3(Billy.transform.position.x, Billy.transform.position.y, -40);
 		AudioSource a = this.GetComponent<AudioSource> ();
-		a.clip = music;
 		a.Play (0);
 		//AudioSource.PlayClipAtPoint (music, transform.position);
 	}
