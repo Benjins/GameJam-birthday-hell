@@ -61,12 +61,9 @@ public class ItemCarrier : MonoBehaviour {
 				foreach(Collider col in Physics.OverlapSphere(transform.position, pickUpRadius)){
 					if(col.tag == "Item"){
 						ItemBase item = col.GetComponent<ItemBase>();
-						if(item != null){
+						if(item != null && item.carrier == null){
 							item.OnPickup(this);
 							break;
-						}
-						else{
-							Debug.LogError("There's an object tagged as an item without an ItemBase component.", col.gameObject);
 						}
 					}
 				}
