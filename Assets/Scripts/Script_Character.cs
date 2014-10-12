@@ -22,9 +22,14 @@ public class Script_Character : MonoBehaviour {
 	void Start () {
 		controller = GetComponent<CharacterController> ();
 		cameraScript = Camera.main.GetComponent<CameraScript>();
-		anim = GetComponent<Animator>();
+		anim = GetComponentInChildren<Animator>();
 	}
 
+	void FixedUpdate(){
+		Vector3 position = transform.position;
+		position.z = 0;
+		transform.position = position;
+	}
 	
 	void Update() {
 
@@ -33,9 +38,29 @@ public class Script_Character : MonoBehaviour {
 				moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), moveDirection.y, 0);
 				moveDirection = transform.TransformDirection (moveDirection);
 				moveDirection.x *= speed;
+
+				if(anim){
+					anim.SetFloat("Speed", Mathf.Abs(Input.GetAxis ("Horizontal")));
+				}
+
+				if(Input.GetAxis ("Horizontal") != 0){
+					transform.localScale = new Vector3( Mathf.Sign(Input.GetAxis ("Horizontal")), 
+					                                    transform.localScale.y, 
+					                                    transform.localScale.z);
+				}
+
 				if (controller.isGrounded) {
-					if (Input.GetKey ("w"))
+					if (Input.GetKey ("w")){
 						moveDirection.y = jumpSpeed;
+						if(anim){
+							//anim.SetTrigger("Jump");
+						}
+					}
+					else{
+						if(anim){
+							anim.SetTrigger("Land");
+						}
+					}
 				}
 				controller.Move (moveDirection * Time.deltaTime);
 			}
