@@ -21,12 +21,12 @@ public class ItemCarrier : MonoBehaviour {
 		if(carriedItem != null){
 			carriedItem.transform.localPosition = itemLocation.localPosition;
 			if(anim){
-				anim.SetBool("Carrying",true);
+				anim.SetBool("Carry",true);
 			}
 		}
 		else{
 			if(anim){
-				anim.SetBool("Carrying",false);
+				anim.SetBool("Carry",false);
 			}
 		}
 

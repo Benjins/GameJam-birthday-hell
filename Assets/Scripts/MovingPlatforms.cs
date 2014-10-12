@@ -8,6 +8,11 @@ public class MovingPlatforms : MonoBehaviour {
 
 	public Vector3 platform1Change;
 	public Vector3 platform2Change;
+	public float totalTime = 2.0f;
+
+	Vector3 originalPosition1;
+	Vector3 originalPosition2;
+	float timeMoving = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -22,12 +27,20 @@ public class MovingPlatforms : MonoBehaviour {
 
 	public void OnSwitched(bool state){
 		if(state){
-			platform1.position += platform1Change;
-			platform2.position += platform2Change;
+			platform1.rigidbody.MovePosition(platform1.position + platform1Change);
+			platform2.rigidbody.MovePosition(platform2.position + platform2Change);
 		}
 		else{
-			platform1.position -= platform1Change;
-			platform2.position -= platform2Change;
+			platform1.rigidbody.MovePosition(platform1.position - platform1Change);
+			platform2.rigidbody.MovePosition(platform2.position - platform2Change);
 		}
+	}
+
+	IEnumerator MoveForward(){
+
+	}
+
+	IEnumerator MoveBack(){
+		
 	}
 }
