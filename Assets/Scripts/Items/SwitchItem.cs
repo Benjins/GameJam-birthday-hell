@@ -17,7 +17,7 @@ public class SwitchItem : ItemBase {
 			Activated = value;
 			renderer.material.mainTexture = (Activated? onSprite : offSprite);
 			if(target != null){
-				target.SendMessage("OnSwitched", SendMessageOptions.DontRequireReceiver);
+				target.SendMessage("OnSwitched", Activated, SendMessageOptions.DontRequireReceiver);
 			}
 		}
 	}
