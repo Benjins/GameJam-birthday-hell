@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SwitchItem : ItemBase {
-
-	public new bool useGravity = false;
+public class SwitchItem : MonoBehaviour {
+	
 	public Texture2D onSprite;
 	public Texture2D offSprite;
 	public GameObject target;
@@ -24,7 +23,8 @@ public class SwitchItem : ItemBase {
 
 	bool Activated = false;
 
-	public override void OnPickup(ItemCarrier pickedUpBy){
-		activated = !activated;
+	void OnTriggerEnter(Collider other){
+		if (other.gameObject.tag == "Player")
+			activated = !activated;
 	}
 }
