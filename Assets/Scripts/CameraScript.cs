@@ -11,15 +11,19 @@ public class CameraScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		isFollowing = false;
-		charFollowing = "Billy";
+		charFollowing = "Brett";
 		this.transform.parent = Billy.transform;
 		this.transform.position = new Vector3(Billy.transform.position.x, Billy.transform.position.y, -40);
+
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+		Billy = players[0];
+		Brett = players[1];
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (Input.GetKeyDown ("o")) {
+		if (Input.GetKeyDown (KeyCode.O)) {
 			//switch characters
 			if (charFollowing.Equals ("Billy")) {
 				charFollowing = "Brett";
@@ -31,6 +35,8 @@ public class CameraScript : MonoBehaviour {
 				this.transform.parent = Billy.transform;
 				this.transform.position = new Vector3(Billy.transform.position.x, Billy.transform.position.y, -40);
 			}
+
+			Debug.Log("Parent after hitting O: " + transform.parent.gameObject);
 		}
 		if (Input.GetKeyDown ("p")) {
 			//toggle follow me

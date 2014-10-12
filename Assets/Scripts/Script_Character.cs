@@ -14,22 +14,32 @@ public class Script_Character : MonoBehaviour {
 	public CharacterController controller;
 	public GameObject follower;
 
+	CameraScript cameraScript;
+
 	// Use this for initialization
 	void Start () {
+		cameraScript = Camera.main.GetComponent<CameraScript>();
 		controller = GetComponent<CharacterController> ();
+		foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Player")){
+			if(obj != gameObject){
+				follower = obj;
+				break;
+			}
+		}
 	}
 
 	
 	void Update() {
 
 		if (!dead) {
-			if (CameraScript.charFollowing == this.name) {
+			if( (gameObject == cameraScript.Billy) == (CameraScript.charFollowing.Equals("Billy"))){
 				moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), moveDirection.y, 0);
 				moveDirection = transform.TransformDirection (moveDirection);
 				moveDirection.x *= speed;
 				if (controller.isGrounded) {
-					if (Input.GetKey ("w"))
+					if (Input.GetKey ("w")){
 						moveDirection.y = jumpSpeed;
+					}
 				}
 				controller.Move (moveDirection * Time.deltaTime);
 			}
