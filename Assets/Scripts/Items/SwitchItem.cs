@@ -3,9 +3,11 @@ using System.Collections;
 
 public class SwitchItem : MonoBehaviour {
 	
-	public Texture2D onSprite;
-	public Texture2D offSprite;
+	public Sprite onSprite;
+	public Sprite offSprite;
 	public GameObject target;
+
+	SpriteRenderer spriteRenderer;
 
 	//Setting activated will automatically switch the sprite
 	bool activated{
@@ -14,7 +16,7 @@ public class SwitchItem : MonoBehaviour {
 		}
 		set{
 			Activated = value;
-			renderer.material.mainTexture = (Activated? onSprite : offSprite);
+			spriteRenderer.sprite = (Activated? onSprite : offSprite);
 			if(target != null){
 				target.SendMessage("OnSwitched", Activated, SendMessageOptions.DontRequireReceiver);
 			}
@@ -22,6 +24,10 @@ public class SwitchItem : MonoBehaviour {
 	}
 
 	bool Activated = false;
+
+	void Start(){
+		spriteRenderer = GetComponent<SpriteRenderer>();
+	}
 
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "Player")
