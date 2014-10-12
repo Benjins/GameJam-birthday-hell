@@ -6,6 +6,7 @@ public class SwitchItem : ItemBase {
 	public new bool useGravity = false;
 	public Texture2D onSprite;
 	public Texture2D offSprite;
+	public GameObject target;
 
 	//Setting activated will automatically switch the sprite
 	bool activated{
@@ -15,6 +16,9 @@ public class SwitchItem : ItemBase {
 		set{
 			Activated = value;
 			renderer.material.mainTexture = (Activated? onSprite : offSprite);
+			if(target != null){
+				target.SendMessage("OnSwitched", SendMessageOptions.DontRequireReceiver);
+			}
 		}
 	}
 

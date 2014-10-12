@@ -43,24 +43,30 @@ public class Script_Character : MonoBehaviour {
 				}
 				controller.Move (moveDirection * Time.deltaTime);
 			}
-			else {
-				if (transform.position.x > follower.transform.position.x + 2) {
-					//youre to the right, so move left
-					moveDirection = new Vector3 (-speed, moveDirection.y, 0);
-				}
-				else if (transform.position.x < follower.transform.position.x - 2) {
-					//youre to the left, so move right
-					moveDirection = new Vector3 (speed, moveDirection.y, 0);
-				}
-				else {
-					moveDirection = new Vector3 (0, moveDirection.y, 0);
-				}
-				if (transform.position.y < (follower.transform.position.y - 1)) {
-					//jump
-					if (controller.isGrounded) {
-						moveDirection.y = jumpSpeed;
-						Debug.Log ("AI Jumped");
+			else{
+
+				if(CameraScript.isFollowing){
+					if (transform.position.x > follower.transform.position.x + 2) {
+						//youre to the right, so move left
+						moveDirection = new Vector3 (-speed, moveDirection.y, 0);
 					}
+					else if (transform.position.x < follower.transform.position.x - 2) {
+						//youre to the left, so move right
+						moveDirection = new Vector3 (speed, moveDirection.y, 0);
+					}
+					else {
+						moveDirection = new Vector3 (0, moveDirection.y, 0);
+					}
+					if (transform.position.y < (follower.transform.position.y - 1)) {
+						//jump
+						if (controller.isGrounded) {
+							moveDirection.y = jumpSpeed;
+							Debug.Log ("AI Jumped");
+						}
+					}
+				}
+				else{
+					moveDirection.x = 0;
 				}
 				controller.Move (moveDirection * Time.deltaTime);
 			}
