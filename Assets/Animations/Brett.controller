@@ -26,7 +26,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Carrying
+  - m_Name: Carry
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -175,7 +175,7 @@ Transition:
     m_EventTreshold: .100000001
     m_ExitTime: 1
   - m_ConditionMode: 1
-    m_ConditionEvent: Carrying
+    m_ConditionEvent: Carry
     m_EventTreshold: .100000001
     m_ExitTime: 1
   m_Atomic: 1
@@ -199,7 +199,7 @@ Transition:
     m_EventTreshold: .100000001
     m_ExitTime: 1
   - m_ConditionMode: 2
-    m_ConditionEvent: Carrying
+    m_ConditionEvent: Carry
     m_EventTreshold: .100000001
     m_ExitTime: 1
   m_Atomic: 1
