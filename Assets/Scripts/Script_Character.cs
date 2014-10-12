@@ -111,8 +111,12 @@ public class Script_Character : MonoBehaviour {
 				controller.Move (moveDirection * Time.deltaTime);
 			}
 		}
-
-		moveDirection.y -= gravity * Time.deltaTime;
+		if (!controller.isGrounded) {
+			moveDirection.y -= gravity * Time.deltaTime;
+		} 
+		else {
+			moveDirection.y = 0;
+		}
 	}
 
 	void OnTriggerEnter(Collider other) {
