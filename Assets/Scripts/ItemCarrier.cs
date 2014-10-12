@@ -9,15 +9,25 @@ public class ItemCarrier : MonoBehaviour {
 	CameraScript cameraScript;
 
 	Transform itemLocation;
+	Animator anim;
 
 	void Start(){
 		itemLocation = transform.FindChild("Item Location");
 		cameraScript = Camera.main.GetComponent<CameraScript>();
+		anim = GetComponentInChildren<Animator>();
 	}
 
 	void Update(){
 		if(carriedItem != null){
 			carriedItem.transform.localPosition = itemLocation.localPosition;
+			if(anim){
+				anim.SetBool("Carrying",true);
+			}
+		}
+		else{
+			if(anim){
+				anim.SetBool("Carrying",false);
+			}
 		}
 
 		if( (gameObject == cameraScript.Billy) ^ (CameraScript.charFollowing == "Billy")){
@@ -28,6 +38,9 @@ public class ItemCarrier : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.I)){
 			if(carriedItem != null){
 				carriedItem.OnThrow();
+				if(anim){
+					anim.SetTrigger("Throw");
+				}
 			}
 		}
 
