@@ -98,6 +98,9 @@ public class Script_Character : MonoBehaviour {
 				}
 				else{
 					moveDirection.x = 0;
+					if(anim){
+						anim.SetFloat("Speed",0);
+					}
 				}
 				controller.Move (moveDirection * Time.deltaTime);
 			}
