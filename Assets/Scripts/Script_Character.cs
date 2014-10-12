@@ -13,6 +13,7 @@ public class Script_Character : MonoBehaviour {
 	public bool dead = false;
 	public CharacterController controller;
 	public GameObject follower;
+	public bool onRope;
 
 	CameraScript cameraScript;
 
@@ -23,6 +24,7 @@ public class Script_Character : MonoBehaviour {
 		controller = GetComponent<CharacterController> ();
 		cameraScript = Camera.main.GetComponent<CameraScript>();
 		anim = GetComponent<Animator>();
+		onRope = false;
 	}
 
 	
@@ -33,7 +35,7 @@ public class Script_Character : MonoBehaviour {
 				moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), moveDirection.y, 0);
 				moveDirection = transform.TransformDirection (moveDirection);
 				moveDirection.x *= speed;
-				if (controller.isGrounded) {
+				if (controller.isGrounded || onRope) {
 					if (Input.GetKey ("w"))
 						moveDirection.y = jumpSpeed;
 				}
@@ -54,7 +56,7 @@ public class Script_Character : MonoBehaviour {
 					}
 					if (this.transform.position.y < (follower.transform.position.y - 1)) {
 						//jump
-						if (controller.isGrounded) {
+						if (controller.isGrounded || onRope) {
 							moveDirection.y = jumpSpeed;
 							Debug.Log (name+" jumped when y was "+transform.position.y);
 						}
@@ -68,6 +70,20 @@ public class Script_Character : MonoBehaviour {
 		}
 
 		moveDirection.y -= gravity * Time.deltaTime;
+	}
+
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.tag == "Rope") {
+			if (this.GetComponent<ItemCarrier> ().carriedItem == null) {
+				onRope = true;
+			}
+		}
+	}
+
+	void OnTriggerExit(Collider other) {
+		if (other.gameObject.tag == "Rope") {
+			onRope = false;
+		}
 	}
 
 

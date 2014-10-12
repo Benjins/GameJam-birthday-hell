@@ -63,7 +63,7 @@ public class ItemBase : MonoBehaviour {
 		thrown = true;
 		if(rigidbody){
 			//rigidbody.AddForce(new Vector3(direction, 1.0f, 0.0f) * throwForce, ForceMode.Impulse);
-			rigidbody.AddForce(new Vector3(direction*10, 10f, 0) * throwForce);
+			rigidbody.AddForce(new Vector3(direction*20, 10f, 0) * throwForce);
 			rigidbody.useGravity = true;
 		}
 		//Actually throw the item with physics.

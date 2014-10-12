@@ -50,6 +50,7 @@ public class ItemCarrier : MonoBehaviour {
 						ItemBase item = col.GetComponent<ItemBase>();
 						if(item != null){
 							item.OnPickup(this);
+							break;
 						}
 						else{
 							Debug.LogError("There's an object tagged as an item without an ItemBase component.", col.gameObject);
