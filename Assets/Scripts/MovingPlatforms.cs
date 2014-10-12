@@ -12,35 +12,51 @@ public class MovingPlatforms : MonoBehaviour {
 
 	Vector3 originalPosition1;
 	Vector3 originalPosition2;
-	float timeMoving = 0.0f;
 
 	// Use this for initialization
+
 	void Start () {
 		platform1 = transform.GetChild(0);
 		platform2 = transform.GetChild(1);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+		originalPosition1 = platform1.position;
+		originalPosition2 = platform2.position;
 	}
 
 	public void OnSwitched(bool state){
 		if(state){
-			platform1.rigidbody.MovePosition(platform1.position + platform1Change);
-			platform2.rigidbody.MovePosition(platform2.position + platform2Change);
+			StartCoroutine(MoveTorward());
 		}
 		else{
-			platform1.rigidbody.MovePosition(platform1.position - platform1Change);
-			platform2.rigidbody.MovePosition(platform2.position - platform2Change);
+			StartCoroutine(MoveBack());
 		}
 	}
 
-	IEnumerator MoveForward(){
+	IEnumerator MoveTorward(){
+		float timeMoving = 0.0f;
 
+		while(timeMoving < totalTime){
+			timeMoving += Time.deltaTime;
+			platform1.rigidbody.MovePosition(originalPosition1 + timeMoving/totalTime * platform1Change);
+			platform2.rigidbody.MovePosition(originalPosition2 + timeMoving/totalTime * platform2Change);
+			yield return null;
+		}
+
+		platform1.rigidbody.MovePosition(originalPosition1 + platform1Change);
+		platform2.rigidbody.MovePosition(originalPosition2 + platform2Change);
 	}
 
 	IEnumerator MoveBack(){
+		float timeMoving = totalTime;
 		
+		while(timeMoving > 0){
+			timeMoving -= Time.deltaTime;
+			platform1.rigidbody.MovePosition(originalPosition1 + timeMoving/totalTime * platform1Change);
+			platform2.rigidbody.MovePosition(originalPosition2 + timeMoving/totalTime * platform2Change);
+			yield return null;
+		}
+		
+		platform1.rigidbody.MovePosition(originalPosition1);
+		platform2.rigidbody.MovePosition(originalPosition2);
 	}
 }
