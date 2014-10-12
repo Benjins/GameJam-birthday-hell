@@ -77,12 +77,21 @@ public class Script_Character : MonoBehaviour {
 					else {
 						moveDirection = new Vector3 (0, moveDirection.y, 0);
 					}
+
+					anim.SetFloat("Speed", Mathf.Abs(moveDirection.x));
+
 					if (this.transform.position.y < (follower.transform.position.y - 1)) {
 						//jump
 						if (controller.isGrounded) {
 							moveDirection.y = jumpSpeed;
 							Debug.Log (name+" jumped when y was "+transform.position.y);
 						}
+					}
+
+					if(moveDirection.x != 0){
+						transform.localScale = new Vector3(Mathf.Sign(moveDirection.x), 
+						                                   transform.localScale.y, 
+						                                   transform.localScale.z);
 					}
 				}
 				else{
