@@ -34,6 +34,9 @@ public class Script_Character : MonoBehaviour {
 	}
 	
 	void Update() {
+		if (Application.loadedLevel == 1 && transform.position.y < 6) {
+			Application.LoadLevel (Application.loadedLevel);
+		}
 
 		if (!dead) {
 			if ((CameraScript.charFollowing == "Billy") == (cameraScript.Billy == gameObject)) {
