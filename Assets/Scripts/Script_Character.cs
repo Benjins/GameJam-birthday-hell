@@ -23,10 +23,15 @@ public class Script_Character : MonoBehaviour {
 	void Start () {
 		controller = GetComponent<CharacterController> ();
 		cameraScript = Camera.main.GetComponent<CameraScript>();
-		anim = GetComponent<Animator>();
+		anim = GetComponentInChildren<Animator>();
 		onRope = false;
 	}
 
+	void FixedUpdate(){
+		Vector3 position = transform.position;
+		position.z = 0;
+		transform.position = position;
+	}
 	
 	void Update() {
 
@@ -35,9 +40,29 @@ public class Script_Character : MonoBehaviour {
 				moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), moveDirection.y, 0);
 				moveDirection = transform.TransformDirection (moveDirection);
 				moveDirection.x *= speed;
+
+				if(anim){
+					anim.SetFloat("Speed", Mathf.Abs(Input.GetAxis ("Horizontal")));
+				}
+
+				if(Input.GetAxis ("Horizontal") != 0){
+					transform.localScale = new Vector3( Mathf.Sign(Input.GetAxis ("Horizontal")), 
+					                                    transform.localScale.y, 
+					                                    transform.localScale.z);
+				}
+
 				if (controller.isGrounded || onRope) {
-					if (Input.GetKey ("w"))
+					if (Input.GetKey ("w")){
 						moveDirection.y = jumpSpeed;
+						if(anim){
+							//anim.SetTrigger("Jump");
+						}
+					}
+					else{
+						if(anim){
+							anim.SetTrigger("Land");
+						}
+					}
 				}
 				controller.Move (moveDirection * Time.deltaTime);
 			}
@@ -54,12 +79,21 @@ public class Script_Character : MonoBehaviour {
 					else {
 						moveDirection = new Vector3 (0, moveDirection.y, 0);
 					}
+
+					anim.SetFloat("Speed", Mathf.Abs(moveDirection.x));
+
 					if (this.transform.position.y < (follower.transform.position.y - 1)) {
 						//jump
 						if (controller.isGrounded || onRope) {
 							moveDirection.y = jumpSpeed;
 							Debug.Log (name+" jumped when y was "+transform.position.y);
 						}
+					}
+
+					if(moveDirection.x != 0){
+						transform.localScale = new Vector3(Mathf.Sign(moveDirection.x), 
+						                                   transform.localScale.y, 
+						                                   transform.localScale.z);
 					}
 				}
 				else{
